@@ -17,10 +17,13 @@ Your app is ready to be deployed!
 See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
 
 ### `npm run pre-commit`
+
 Format your code before commit with [prettier](https://prettier.io/).
 
-### git-cz
+### `git-cz`
+
 Follow git flow with [commitizen](https://github.com/commitizen/cz-cli).
+
 ### Code Splitting
 
 This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)

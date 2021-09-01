@@ -1,10 +1,10 @@
 import { useState } from "react";
 import Button from "./Button";
 import Loading from "./Loading";
-import Modal from "./Modal";
 import Pagination from "./Pagination";
+import DetailModal from "./DetailModal";
 
-function Table(props) {
+function MovieTable(props) {
   const [id, setId] = useState("");
 
   const { isLoading, current, onPageChange, totalResults, columns } = props;
@@ -52,16 +52,16 @@ function Table(props) {
           </table>
         )}
       </div>
-      {totalResults > 10 &&
-      <Pagination
-        current={current}
-        onPageChange={onPageChange}
-        total={totalResults ? Math.ceil(totalResults / 10) : 1}
-      />
-            }
-      {id && <Modal id={id} onClose={() => setId('')} />}
+      {totalResults > 10 && (
+        <Pagination
+          current={current}
+          onPageChange={onPageChange}
+          total={totalResults ? Math.ceil(totalResults / 10) : 1}
+        />
+      )}
+      {id && <DetailModal id={id} onClose={() => setId("")} />}
     </>
   );
 }
 
-export default Table;
+export default MovieTable;

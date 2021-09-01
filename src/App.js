@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import getMovies from "./api/getMovies";
 import Search from "./components/Search";
-import Table from "./components/Table";
+import MovieTable from "./components/MovieTable";
 
 function App() {
   const [isLoading, setIsLoading] = useState(false);
@@ -26,7 +26,7 @@ function App() {
       <h1 className="text-3xl">電影資料庫</h1>
       <Search onSearch={(searchTerm) => setSearchTerm(searchTerm)} />
       {hasLoaded && (
-        <Table
+        <MovieTable
           isLoading={isLoading}
           columns={movieResults}
           current={page}

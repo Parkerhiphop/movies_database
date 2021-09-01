@@ -6,13 +6,17 @@ function Button(props) {
   return (
     <button
       className={`
-        min-w-button
+        inline-flex
+        items-center
+        justify-center
+        w-max
         rounded-md
         hover:opacity-75
         focus:ring-1
         ${color}
         ${size === "sm" ? "h-8" : "h-10"}
-        ${size === "sm" ? "p-1" : "p-2"}
+        ${size === "sm" ? "p-2" : "p-3"}
+        px-4
       `}
       type="button"
       onClick={onClick}
@@ -20,7 +24,6 @@ function Button(props) {
       <span
         className={`
           ${size === "sm" ? "text-xs" : "text-sm"}
-          ${size === "sm" ? "leading-7" : ""}
           text-gray-50
         `}
       >
