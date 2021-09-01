@@ -2,7 +2,7 @@ import { memo, useCallback, useState } from "react";
 import Button from "./Button";
 import Input from "./Input";
 
-function Search(props) {
+function MovieSearch(props) {
   const { clearable, hasError, onSearch, onClear } = props;
 
   const [searchTerm, setSearchTerm] = useState("");
@@ -30,7 +30,7 @@ function Search(props) {
             handleError();
           }
         }}
-        placeholder="請輸入電影名稱"
+        placeholder="請輸入電影名稱（英文）"
       />
       <Button
         color="bg-blue-400"
@@ -56,4 +56,4 @@ function Search(props) {
   );
 }
 
-export default memo(Search);
+export default memo(MovieSearch);

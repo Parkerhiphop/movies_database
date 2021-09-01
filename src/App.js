@@ -1,6 +1,6 @@
 import { memo, useEffect, useState } from "react";
 import getMovies from "./api/getMovies";
-import Search from "./components/Search";
+import MovieSearch from "./components/MovieSearch";
 import MovieTable from "./components/MovieTable";
 import Select from "./components/Select";
 
@@ -69,7 +69,7 @@ function App() {
             options={typeOptions}
           />
         )}
-        <Search
+        <MovieSearch
           clearable={hasLoaded}
           hasError={hasError}
           onClear={() => {
