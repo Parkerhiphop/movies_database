@@ -7,7 +7,7 @@ function App() {
   const [isLoading, setIsLoading] = useState(false);
   const [movieData, setMovieData] = useState({});
   const [searchTerm, setSearchTerm] = useState("");
-  const [page, setPage] = useState("1");
+  const [page, setPage] = useState(1);
 
   useEffect(() => {
     const movies = getMovies({ setIsLoading, searchTerm, page });
@@ -31,7 +31,7 @@ function App() {
           columns={movieResults}
           current={page}
           onPageChange={setPage}
-          totalPage={Math.ceil(totalResults / 10)}
+          totalResults={totalResults}
         />
       )}
     </div>

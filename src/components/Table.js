@@ -7,9 +7,7 @@ import Pagination from "./Pagination";
 function Table(props) {
   const [id, setId] = useState("");
 
-  const { isLoading, current, onPageChange, totalPage, columns } = props;
-
-  console.log("columns", columns);
+  const { isLoading, current, onPageChange, totalResults, columns } = props;
 
   return (
     <>
@@ -54,12 +52,14 @@ function Table(props) {
           </table>
         )}
       </div>
+      {totalResults > 10 &&
       <Pagination
         current={current}
         onPageChange={onPageChange}
-        totalPage={totalPage}
+        total={totalResults ? Math.ceil(totalResults / 10) : 1}
       />
-      {id && <Modal id={id} onClose={() => setId("")} />}
+            }
+      {id && <Modal id={id} onClose={() => setId('')} />}
     </>
   );
 }
