@@ -1,8 +1,16 @@
-import { useState } from "react";
+import { memo, useState } from "react";
 import Button from "./Button";
 import Loading from "./Loading";
 import Pagination from "./Pagination";
 import DetailModal from "./DetailModal";
+
+export function TH(props) {
+  return <th className="border-2 p-2">{props.children}</th>;
+}
+
+export function TD(props) {
+  return <td className="border-2 p-3">{props.children}</td>;
+}
 
 function MovieTable(props) {
   const [id, setId] = useState("");
@@ -17,27 +25,27 @@ function MovieTable(props) {
           <table className="table-fixed border-collapse border-2 w-auto">
             <thead className="w-auto">
               <tr>
-                <th className="border-2">海報</th>
-                <th className="border-2">名稱</th>
-                <th className="border-2">類型</th>
-                <th className="border-2">年份</th>
-                <th className="border-2" />
+                <TH>海報</TH>
+                <TH>名稱</TH>
+                <TH>類型</TH>
+                <TH>年份</TH>
+                <TH />
               </tr>
             </thead>
             <tbody className="w-auto">
               {columns.map((column) => (
                 <tr key={column.imdbID}>
-                  <td className="border-2">
+                  <TD>
                     <img
                       className="w-28 h-32"
                       src={column.Poster}
                       alt="Poster"
                     />
-                  </td>
-                  <td className="border-2">{column.Title}</td>
-                  <td className="border-2">{column.Type}</td>
-                  <td className="border-2">{column.Year}</td>
-                  <td className="border-2">
+                  </TD>
+                  <TD>{column.Title}</TD>
+                  <TD>{column.Type}</TD>
+                  <TD>{column.Year}</TD>
+                  <TD>
                     <Button
                       color="bg-gray-500"
                       size="sm"
@@ -45,7 +53,7 @@ function MovieTable(props) {
                     >
                       詳細資料
                     </Button>
-                  </td>
+                  </TD>
                 </tr>
               ))}
             </tbody>
@@ -64,4 +72,4 @@ function MovieTable(props) {
   );
 }
 
-export default MovieTable;
+export default memo(MovieTable);

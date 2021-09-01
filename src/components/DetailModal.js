@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { memo, useEffect, useState } from "react";
 import { createPortal } from "react-dom";
 import getMovieDetail from "../api/getMovieDetail";
 import Button from "./Button";
@@ -44,7 +44,8 @@ function DetailModal(props) {
                 <button
                   className="absolute top-4 right-5 font-bold"
                   type="button"
-                  onClick={() => onClose()}>
+                  onClick={() => onClose()}
+                >
                   𝖷
                 </button>
               </div>
@@ -74,4 +75,4 @@ function DetailModal(props) {
   );
 }
 
-export default DetailModal;
+export default memo(DetailModal);

@@ -1,5 +1,7 @@
+import { memo } from "react";
+
 function Loading() {
-  return <p>Loading...</p>;
+  return <p className="p-3">Loading...</p>;
 }
 
-export default Loading;
+export default memo(Loading);

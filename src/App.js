@@ -1,30 +1,91 @@
-import { useEffect, useState } from "react";
+import { memo, useEffect, useState } from "react";
 import getMovies from "./api/getMovies";
 import Search from "./components/Search";
 import MovieTable from "./components/MovieTable";
+import Select from "./components/Select";
+
+const typeOptions = [
+  {
+    value: "",
+    name: "搜尋影視類型",
+  },
+  {
+    value: "movie",
+    name: "電影",
+  },
+  {
+    value: "series",
+    name: "影集",
+  },
+  {
+    value: "episode",
+    name: "單集",
+  },
+];
 
 function App() {
   const [isLoading, setIsLoading] = useState(false);
   const [movieData, setMovieData] = useState({});
+  const [type, setType] = useState("");
   const [searchTerm, setSearchTerm] = useState("");
   const [page, setPage] = useState(1);
 
   useEffect(() => {
-    const movies = getMovies({ setIsLoading, searchTerm, page });
+    if (searchTerm) {
+      const movies = getMovies({ setIsLoading, searchTerm, page, type });
 
-    movies.then((movie) => {
-      setMovieData(movie);
-    });
-  }, [searchTerm, page]);
+      movies.then((movie) => {
+        setMovieData(movie);
+      });
+    }
+  }, [searchTerm, page, type]);
 
-  const { Search: movieResults, totalResults, Response } = movieData;
+  const {
+    Search: movieResults,
+    totalResults,
+    Response,
+    Error: hasError,
+  } = movieData;
 
-  const hasLoaded = Response === "True"; /** 長出那個 layout */
+  useEffect(() => {
+    if (hasError) {
+      setType("");
+      setSearchTerm("");
+    }
+  }, [hasError, searchTerm, type]);
+
+  const hasLoaded = Response === "True";
 
   return (
     <div className="w-screen h-screen flex flex-col items-center justify-center gap-5">
       <h1 className="text-3xl">電影資料庫</h1>
-      <Search onSearch={(searchTerm) => setSearchTerm(searchTerm)} />
+      <div className="inline-flex flex-row gap-4">
+        {hasLoaded && (
+          <Select
+            name="type"
+            onSelect={(value) => {
+              setType(value);
+            }}
+            options={typeOptions}
+          />
+        )}
+        <Search
+          clearable={hasLoaded}
+          hasError={hasError}
+          onClear={() => {
+            setSearchTerm("");
+            setType("");
+            setPage(1);
+            setMovieData({});
+          }}
+          onSearch={(searchTerm) => setSearchTerm(searchTerm)}
+        />
+      </div>
+      {hasError && (
+        <h5 className="text-center text-red-500 font-bold tracking-widest">
+          並沒有符合的搜尋結果！
+        </h5>
+      )}
       {hasLoaded && (
         <MovieTable
           isLoading={isLoading}
@@ -38,4 +99,4 @@ function App() {
   );
 }
 
-export default App;
+export default memo(App);
