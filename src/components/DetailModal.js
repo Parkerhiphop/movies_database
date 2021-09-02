@@ -29,7 +29,7 @@ function DetailModal(props) {
           className="fixed inset-0 bg-gray-500 bg-opacity-75 transition-opacity"
           aria-hidden="true"
         ></div>
-        <div className="w-3/6 overflow-scroll bg-white rounded-lg text-left shadow-xl z-20">
+        <div className="w-3/6 overflow-auto bg-white rounded-lg text-left z-20 p-0">
           {isLoading ? (
             <Loading />
           ) : (
